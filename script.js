@@ -27,28 +27,20 @@ const scenes = [
 
 let index = 0;
 
-const envelope = document.getElementById("envelope");
+const card = document.getElementById("card");
 const photo = document.getElementById("photo");
 const text = document.getElementById("text");
-const nextBtn = document.getElementById("nextBtn");
 
-function loadScene(i) {
+function showScene(i) {
   photo.src = scenes[i].img;
   text.innerText = scenes[i].text;
 }
 
-envelope.addEventListener("click", () => {
-  envelope.classList.add("open");
-  loadScene(index);
-});
+showScene(index);
 
-nextBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
+card.addEventListener("click", () => {
   index++;
   if (index < scenes.length) {
-    loadScene(index);
-  } else {
-    nextBtn.innerText = "💗";
-    nextBtn.disabled = true;
+    showScene(index);
   }
 });
