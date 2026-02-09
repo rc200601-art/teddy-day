@@ -26,76 +26,39 @@ body {
   to { filter: brightness(1.15); }
 }
 
-/* Center */
-.container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1400px;
-}
-
-/* Envelope */
-.envelope {
-  width: 340px;
-  height: 230px;
-  background: linear-gradient(145deg, #ffb6d5, #ff7eb3);
+/* Card */
+.card {
   position: relative;
-  border-radius: 14px;
-  box-shadow: 0 35px 90px rgba(255,120,180,0.55);
-  transform-style: preserve-3d;
+  max-width: 360px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.85);
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(255,120,180,0.5);
   cursor: pointer;
 }
 
-/* Flap */
-.flap {
-  position: absolute;
-  top: 0;
+.card img {
   width: 100%;
-  height: 52%;
-  background: linear-gradient(145deg, #ffc6e1, #ff8fc4);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: top;
-  transition: transform 1s ease;
-  z-index: 3;
-}
-
-.envelope.open .flap {
-  transform: rotateX(160deg);
-}
-
-/* Letter */
-.letter {
-  position: absolute;
-  inset: 12px;
-  background: rgba(0,0,0,0.88);
   border-radius: 12px;
-  padding: 14px;
-  transform: translateY(70px);
-  opacity: 0;
-  transition: all 1s ease;
-  text-align: center;
-}
-
-.envelope.open .letter {
-  transform: translateY(-45px);
-  opacity: 1;
-}
-
-/* Image */
-.letter img {
-  width: 100%;
-  border-radius: 10px;
   margin-bottom: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* Text */
-.letter p {
+.card p {
   color: #fff;
   font-size: 1.08rem;
   line-height: 1.45;
   text-shadow:
     0 0 8px rgba(255,170,210,0.9),
     0 0 20px rgba(255,90,160,0.9);
+}
+
+.hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: rgba(255,200,220,0.7);
 }
