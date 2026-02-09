@@ -1,46 +1,54 @@
-const scenes = [
+let index = 0;
+let musicStarted = false;
+
+const photo = document.getElementById("photo");
+const text = document.getElementById("text");
+const music = document.getElementById("bgMusic");
+
+const photos = [
   {
     img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.24.47%20PM.jpeg",
-    text: "Happy Teddy Day 🧸🤍"
+    text: "This is Bruno… 🐶🤍"
   },
   {
     img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.27%20PM.jpeg",
-    text: "This is Bruno…\nand today, he’s not just my teddy."
+    text: "And today, he’s not just my teddy 🧸"
   },
   {
     img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.00%20PM.jpeg",
-    text: "After seeing you in college,\neven my low-effort coding felt less…"
+    text: "He’s holding something very soft… 💗"
   },
   {
     img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.41%20PM.jpeg",
-    text: "Because your beauty,\nyour personality,\nyour voice…\n\nand YOU deserve something better ✨"
+    text: "Low effort coding was less… after seeing you ✨"
   },
   {
     img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.14%20PM.jpeg",
-    text: "Hi… I’m Bruno 🧸\n\nCan you please tell my brother…\nif you’ll be his Valentine this year? 👉👈"
+    text: "Bruno wants to ask… will you be his Valentine? 🥺❤️"
   },
   {
     img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.51%20PM.jpeg",
-    text: "I hope I’m the only one\nwho sends you a Teddy Day surprise…\nand a teddy too 🧸✨"
+    text: "And maybe… I hope I’m the only one sending this 🫶"
   }
 ];
 
-let index = 0;
+// load first
+photo.src = photos[0].img;
+text.innerText = photos[0].text;
 
-const card = document.getElementById("card");
-const photo = document.getElementById("photo");
-const text = document.getElementById("text");
+document.body.addEventListener("click", () => {
+  if (!musicStarted) {
+    music.play().catch(() => {});
+    musicStarted = true;
+  }
 
-function showScene(i) {
-  photo.src = scenes[i].img;
-  text.innerText = scenes[i].text;
-}
-
-showScene(index);
-
-card.addEventListener("click", () => {
-  index++;
-  if (index < scenes.length) {
-    showScene(index);
+  if (index < photos.length - 1) {
+    index++;
+    photo.style.transform = "scale(0.95)";
+    setTimeout(() => {
+      photo.src = photos[index].img;
+      text.innerText = photos[index].text;
+      photo.style.transform = "scale(1)";
+    }, 250);
   }
 });
