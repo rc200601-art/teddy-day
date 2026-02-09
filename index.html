@@ -1,118 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teddy Day 🧸</title>
 
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
 
-  body {
-    height: 100vh;
-    background: radial-gradient(circle at top, #ff9ad5, #000);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #ff9acb, #0b0012);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-  .card {
-    width: min(88vw, 380px);
-    height: 82vh;
-    background: rgba(0,0,0,0.4);
-    border-radius: 22px;
-    padding: 14px;
-    box-shadow: 0 0 35px rgba(255,182,193,0.6);
-    display: flex;
-    flex-direction: column;
-  }
+/* Card */
+.card {
+  width: min(90vw, 380px);
+  height: 85vh;
+  background: rgba(0,0,0,0.45);
+  border-radius: 26px;
+  padding: 16px;
+  box-shadow:
+    0 0 40px rgba(255,182,193,0.6),
+    inset 0 0 30px rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  animation: float 4s ease-in-out infinite;
+}
 
-  img {
-    width: 100%;
-    height: 72%;
-    object-fit: cover;
-    border-radius: 16px;
-  }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
 
-  .text {
-    margin-top: 12px;
-    text-align: center;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-shadow:
-      0 0 10px rgba(255,255,255,0.7),
-      0 0 20px rgba(255,105,180,0.8);
-    min-height: 3.5em;
-  }
+img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+  transition: transform 0.6s ease;
+}
 
-  .hint {
-    margin-top: auto;
-    text-align: center;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.6);
-  }
+/* Text */
+.text {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.6),
+    0 0 20px rgba(255,105,180,0.7);
+  min-height: 4em;
+}
+
+/* Button */
+button {
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff6fae, #ffb6d5);
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255,182,193,0.7);
+  transition: transform 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.hint {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+}
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <img id="photo" />
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <img id="photo">
   <div class="text" id="text"></div>
-  <div class="hint">tap anywhere 🤍</div>
+  <button id="nextBtn">Accept 🤍</button>
+  <div class="hint">tap gently</div>
 </div>
 
 <script>
-  const slides = [
-    {
-      img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.24.47%20PM.jpeg",
-      text: "This is Bruno… 🐶🤍"
-    },
-    {
-      img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.27%20PM.jpeg",
-      text: "And today, he’s not just my teddy 🧸"
-    },
-    {
-      img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.00%20PM.jpeg",
-      text: "He’s keeping something very soft… 💗"
-    },
-    {
-      img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.41%20PM.jpeg",
-      text: "After seeing you, even low effort felt pointless ✨"
-    },
-    {
-      img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.14%20PM.jpeg",
-      text: "Bruno wants to ask… will you be his Valentine? 🥺❤️"
-    },
-    {
-      img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.51%20PM.jpeg",
-      text: "And honestly… I hope I’m the only one sending this 🤍"
-    }
-  ];
+const slides = [
+  {
+    img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.24.47%20PM.jpeg",
+    text: "Happy Teddy Day 🧸🤍"
+  },
+  {
+    img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.27%20PM.jpeg",
+    text: "I want to share my Bruno as a teddy with you… because you are also very dear to me 🥺💗"
+  },
+  {
+    img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.00%20PM.jpeg",
+    text: "After seeing you today… what I’m doing feels very less. I’m trying to do less so that you feel more special as we move forward 🫶🥺"
+  },
+  {
+    img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.41%20PM.jpeg",
+    text: "Just like we decided before… 🤍"
+  },
+  {
+    img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.14%20PM.jpeg",
+    text: "Bruno wants to ask you something… will you be my brother’s Valentine? 🥺🐶❤️"
+  },
+  {
+    img: "https://raw.githubusercontent.com/rc200601-art/teddy-day/main/WhatsApp%20Image%202026-02-09%20at%207.25.51%20PM.jpeg",
+    text: "I hope I’m the only one who sends you a teddy… or at least the only one whose teddy you accept 🥰🥺"
+  }
+];
 
-  let i = 0;
-  const photo = document.getElementById("photo");
-  const text = document.getElementById("text");
+let index = 0;
+let musicStarted = false;
 
-  function showSlide() {
-    photo.src = slides[i].img;
-    text.innerText = slides[i].text;
+const photo = document.getElementById("photo");
+const text = document.getElementById("text");
+const btn = document.getElementById("nextBtn");
+const music = document.getElementById("music");
+
+function showSlide() {
+  photo.style.transform = "scale(0.96)";
+  setTimeout(() => {
+    photo.src = slides[index].img;
+    text.innerText = slides[index].text;
+    photo.style.transform = "scale(1)";
+  }, 200);
+}
+
+showSlide();
+
+btn.addEventListener("click", () => {
+  if (!musicStarted) {
+    music.play().catch(() => {});
+    musicStarted = true;
   }
 
-  showSlide();
-
-  document.body.addEventListener("click", () => {
-    if (i < slides.length - 1) {
-      i++;
-      showSlide();
-    }
-  });
+  if (index < slides.length - 1) {
+    index++;
+    showSlide();
+  } else {
+    btn.innerText = "🧸🤍";
+  }
+});
 </script>
 
 </body>
